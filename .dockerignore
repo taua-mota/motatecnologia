@@ -1,0 +1,7 @@
+.git
+.github
+.codex
+.impeccable.md
+__pycache__/
+*.pyc
+data/

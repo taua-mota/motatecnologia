@@ -1,0 +1,6 @@
+.codex
+.impeccable.md
+__pycache__/
+data/*.db
+.env
+.secrets/

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard de Acessos</title>
+    <style>
+      :root {
+        --bg: #0f1520;
+        --surface: #182130;
+        --line: #2e3b52;
+        --text: #f0f5ff;
+        --muted: #9eb0cc;
+        --brand: #42d392;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 24px;
+      }
+
+      .wrap {
+        margin: 0 auto;
+        max-width: 1100px;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      p {
+        color: var(--muted);
+      }
+
+      .toolbar {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .toolbar button {
+        background: var(--brand);
+        border: none;
+        border-radius: 8px;
+        color: #0b1420;
+        cursor: pointer;
+        font-weight: 700;
+        padding: 10px 12px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: 18px;
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+      }
+
+      .card h2 {
+        color: var(--muted);
+        font-size: 13px;
+        margin: 0;
+      }
+
+      .value {
+        font-size: 28px;
+        font-weight: 800;
+        margin-top: 6px;
+      }
+
+      .panels {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 12px;
+      }
+
+      ul {
+        margin: 8px 0 0;
+        padding-left: 16px;
+      }
+
+      li {
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      table {
+        border-collapse: collapse;
+        margin-top: 12px;
+        width: 100%;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        font-size: 12px;
+        padding: 8px 6px;
+        text-align: left;
+      }
+
+      th {
+        color: var(--muted);
+      }
+
+      .error {
+        color: #ff8080;
+        margin-top: 10px;
+      }
+
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .panels {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>Dashboard de Acessos</h1>
+      <p>Self-hosted com SQLite. Atualize para ver os dados mais recentes.</p>
+
+      <div class="toolbar">
+        <button id="refresh" type="button">Atualizar</button>
+        <span style="color: var(--muted)">Acesso protegido por usuário e senha.</span>
+        <span id="generated" style="color: var(--muted)"></span>
+      </div>
+      <div id="error" class="error"></div>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Pageviews</h2>
+          <div id="pageviews" class="value">0</div>
+        </article>
+        <article class="card">
+          <h2>Visitantes únicos</h2>
+          <div id="visitors" class="value">0</div>
+        </article>
+        <article class="card">
+          <h2>Eventos</h2>
+          <div id="events" class="value">0</div>
+        </article>
+        <article class="card">
+          <h2>Pageviews (24h)</h2>
+          <div id="last24h" class="value">0</div>
+        </article>
+      </section>
+
+      <section class="panels">
+        <article class="card">
+          <h2>Páginas mais acessadas</h2>
+          <ul id="topPages"></ul>
+        </article>
+        <article class="card">
+          <h2>Origem de acesso (referrer)</h2>
+          <ul id="topReferrers"></ul>
+        </article>
+      </section>
+
+      <section class="panels">
+        <article class="card">
+          <h2>Eventos de clique</h2>
+          <ul id="topEvents"></ul>
+        </article>
+        <article class="card">
+          <h2>Últimos acessos</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Tipo</th>
+                <th>Página</th>
+                <th>IP</th>
+                <th>Origem</th>
+              </tr>
+            </thead>
+            <tbody id="recentRows"></tbody>
+          </table>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      function setList(id, values, renderItem) {
+        const el = document.getElementById(id);
+        el.innerHTML = '';
+
+        if (!values || values.length === 0) {
+          const li = document.createElement('li');
+          li.textContent = 'Sem dados.';
+          el.appendChild(li);
+          return;
+        }
+
+        values.forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = renderItem(item);
+          el.appendChild(li);
+        });
+      }
+
+      function formatDate(ms) {
+        return new Date(ms).toLocaleString('pt-BR');
+      }
+
+      async function loadStats() {
+        const error = document.getElementById('error');
+        error.textContent = '';
+
+        const res = await fetch('/api/stats');
+
+        if (!res.ok) {
+          throw new Error('Falha ao carregar estatísticas. Verifique o token.');
+        }
+
+        const data = await res.json();
+
+        document.getElementById('generated').textContent =
+          `Atualizado em ${new Date(data.generatedAt).toLocaleString('pt-BR')}`;
+        document.getElementById('pageviews').textContent = data.totals.pageviews;
+        document.getElementById('visitors').textContent = data.totals.uniqueVisitors;
+        document.getElementById('events').textContent = data.totals.events;
+        document.getElementById('last24h').textContent = data.totals.last24hPageviews;
+
+        setList('topPages', data.topPages, (item) => `${item.page} (${item.hits})`);
+        setList('topReferrers', data.topReferrers, (item) => `${item.referrer} (${item.hits})`);
+        setList('topEvents', data.topEvents, (item) => `${item.eventName} (${item.hits})`);
+
+        const rows = document.getElementById('recentRows');
+        rows.innerHTML = '';
+        data.recent.slice(0, 30).forEach((item) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${formatDate(item.createdAt)}</td>
+            <td>${item.eventType}</td>
+            <td>${item.page}</td>
+            <td>${item.ip}</td>
+            <td>${item.referrer || 'direto'}</td>
+          `;
+          rows.appendChild(tr);
+        });
+      }
+
+      document.getElementById('refresh').addEventListener('click', async () => {
+        try {
+          await loadStats();
+        } catch (err) {
+          document.getElementById('error').textContent = err.message;
+        }
+      });
+
+      loadStats().catch((err) => {
+        document.getElementById('error').textContent = err.message;
+      });
+    </script>
+  </body>
+</html>
