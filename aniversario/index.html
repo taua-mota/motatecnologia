@@ -26,9 +26,9 @@
     <header class="topbar">
       <a href="#inicio" class="brand">Aniversário no Chile</a>
       <nav aria-label="Navegação da landing">
-        <a href="#roteiro">Roteiro</a>
-        <a href="#orcamento">Orçamento</a>
-        <a href="#fontes">Fontes</a>
+        <a href="#roteiro" data-track-event="Aniversario Nav Roteiro">Roteiro</a>
+        <a href="#orcamento" data-track-event="Aniversario Nav Orcamento">Orçamento</a>
+        <a href="#fontes" data-track-event="Aniversario Nav Fontes">Fontes</a>
       </nav>
     </header>
 
@@ -229,42 +229,42 @@
         </div>
         <ul class="sources">
           <li>
-            <a href="https://jetsmart.com/br/pt/opcionales?dl=baggage" target="_blank" rel="noreferrer">
+            <a href="https://jetsmart.com/br/pt/opcionales?dl=baggage" target="_blank" rel="noreferrer" data-track-event="Aniversario Fonte JetSMART">
               JetSMART - opcionais e bagagem
             </a>
           </li>
           <li>
-            <a href="https://www.vallenevado.com/es/servicio/ski-rental/" target="_blank" rel="noreferrer">
+            <a href="https://www.vallenevado.com/es/servicio/ski-rental/" target="_blank" rel="noreferrer" data-track-event="Aniversario Fonte Valle Rental">
               Valle Nevado - Ski Rental (temporada 2026)
             </a>
           </li>
           <li>
-            <a href="https://www.vallenevado.com/es/montana/ski/tickets-y-cuponeras/" target="_blank" rel="noreferrer">
+            <a href="https://www.vallenevado.com/es/montana/ski/tickets-y-cuponeras/" target="_blank" rel="noreferrer" data-track-event="Aniversario Fonte Valle Tickets">
               Valle Nevado - Tickets, cuponeras e Tarjeta Valle Plus
             </a>
           </li>
           <li>
-            <a href="https://www.vallenevado.com/en/season-passes/" target="_blank" rel="noreferrer">
+            <a href="https://www.vallenevado.com/en/season-passes/" target="_blank" rel="noreferrer" data-track-event="Aniversario Fonte Valle Season Pass">
               Valle Nevado - Season passes 2026 (My Weekday Pass)
             </a>
           </li>
           <li>
-            <a href="https://www.elcolorado.cl/tarifas-ticket-dia/" target="_blank" rel="noreferrer">
+            <a href="https://www.elcolorado.cl/tarifas-ticket-dia/" target="_blank" rel="noreferrer" data-track-event="Aniversario Fonte ElColorado Ticket">
               El Colorado - Ticket dia
             </a>
           </li>
           <li>
-            <a href="https://www.elcolorado.cl/pases-de-temporada/" target="_blank" rel="noreferrer">
+            <a href="https://www.elcolorado.cl/pases-de-temporada/" target="_blank" rel="noreferrer" data-track-event="Aniversario Fonte ElColorado Temporada">
               El Colorado - Pases de temporada 2026
             </a>
           </li>
           <li>
-            <a href="https://www.andesexperience.cl/produto/sunset-na-cordilheira-infinitum-3k/" target="_blank" rel="noreferrer">
+            <a href="https://www.andesexperience.cl/produto/sunset-na-cordilheira-infinitum-3k/" target="_blank" rel="noreferrer" data-track-event="Aniversario Fonte Andes Experience">
               Andes Experience - Sunset na Cordilheira (Infinitum 3K)
             </a>
           </li>
           <li>
-            <a href="https://www.xe.com/en-us/currencyconverter/convert/?Amount=1&From=CLP&To=BRL" target="_blank" rel="noreferrer">
+            <a href="https://www.xe.com/en-us/currencyconverter/convert/?Amount=1&From=CLP&To=BRL" target="_blank" rel="noreferrer" data-track-event="Aniversario Fonte XE">
               XE - conversão CLP para BRL
             </a>
           </li>
@@ -319,7 +319,7 @@
       }
 
       function getSessionId() {
-        const key = 'aniversario_session_id';
+        const key = 'portfolio_session_id';
         const current = localStorage.getItem(key);
         if (current) return current;
 
@@ -362,7 +362,7 @@
       updateCountdown();
       revealOnScroll();
       updateScrollProgress();
-      trackEvent('pageview', 'aniversario-pageview');
+      trackEvent('pageview', 'pageview');
 
       window.addEventListener('scroll', updateScrollProgress, { passive: true });
       window.addEventListener('resize', updateScrollProgress);
