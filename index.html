@@ -1,243 +1,1541 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MotaTecnologia | Portfólio de Tauã Mota</title>
-    <meta
-      name="description"
-      content="Conheça o trabalho de Tauã Mota Sampaio em produtos web e mobile, integrações e sistemas com impacto real no negócio."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <div class="noise" aria-hidden="true"></div>
-    <div class="halo" aria-hidden="true"></div>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MotaTecnologia | Tauã Mota Sampaio</title>
+<meta
+  name="description"
+  content="Portfólio de Tauã Mota Sampaio, Software Engineer em Teresópolis, com foco em produtos web, mobile, APIs, integrações e sistemas em produção."
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0c0c0c;
+    --bg-2: #141414;
+    --bg-3: #1a1a1a;
+    --ink: #ededeb;
+    --ink-2: #9a9a92;
+    --ink-3: #5a5a52;
+    --ink-4: #2e2e2a;
+    --line: #1f1f1c;
+    --line-2: #2a2a26;
+    --accent: #ff7a3d;
+    --accent-soft: #ffb38a;
+    --accent-ink: #0c0c0c;
+    --green: #6ee787;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+    --display: "Space Grotesk", system-ui, sans-serif;
+    --editorial: "Bricolage Grotesque", system-ui, sans-serif;
+    --serif: "Instrument Serif", "Times New Roman", serif;
+  }
+  .ital {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: -0.005em;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  a { color: inherit; text-decoration: none; }
 
-    <header class="site-header">
-      <div class="container topbar">
-        <a class="brand" href="#inicio">motatecnologia</a>
-        <nav aria-label="Navegação principal">
-          <a href="#atualmente">Atuação Atual</a>
-          <a href="#sobre">Sobre</a>
-          <a href="#projetos">Projetos</a>
-          <a href="#contato">Contato</a>
-        </nav>
+  /* ---------- Cursor blob ---------- */
+  .blob {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(520px 520px at var(--mx, 30%) var(--my, 20%),
+      color-mix(in oklch, var(--accent) 14%, transparent), transparent 70%);
+    mix-blend-mode: screen;
+    transition: background 0.4s ease;
+  }
+
+  /* ---------- Background grid ---------- */
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.018) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at 50% 0%, black, transparent 75%);
+  }
+  .bg-glow {
+    position: fixed;
+    z-index: 0;
+    pointer-events: none;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side,
+      color-mix(in oklch, var(--accent) 22%, transparent), transparent);
+    filter: blur(40px);
+    top: -200px;
+    right: -200px;
+    opacity: 0.5;
+  }
+  .bg-glow.b {
+    top: auto;
+    bottom: -200px;
+    left: -200px;
+    right: auto;
+    background: radial-gradient(closest-side,
+      color-mix(in oklch, var(--accent) 18%, transparent), transparent);
+    opacity: 0.35;
+  }
+
+  /* ---------- Layout ---------- */
+  .container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 720px) {
+    .container { padding: 0 20px; }
+  }
+
+  /* ---------- Top bar (status) ---------- */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    height: 36px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    backdrop-filter: blur(8px);
+  }
+  .topbar .left, .topbar .right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .topbar .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green);
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .topbar .pill {
+    padding: 2px 8px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--ink-2);
+  }
+  .topbar .pill.live { color: var(--green); border-color: color-mix(in oklch, var(--green) 30%, var(--line)); }
+  .topbar .clock { color: var(--ink-2); }
+  @media (max-width: 720px) {
+    .topbar .right .pill:not(:first-child),
+    .topbar .left span:nth-child(n+3) { display: none; }
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: fixed;
+    top: 36px; left: 0; right: 0;
+    z-index: 49;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    background: color-mix(in oklch, var(--bg) 80%, transparent);
+    border-bottom: 1px solid transparent;
+    backdrop-filter: blur(12px);
+    transition: border-color 0.3s;
+  }
+  .nav.scrolled { border-bottom-color: var(--line); }
+  .nav-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .nav-mark .logo {
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--accent);
+    display: grid;
+    place-items: center;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 11px;
+  }
+  .nav-mark .name { color: var(--ink); }
+  .nav-mark .sep { color: var(--ink-3); }
+  .nav-mark .ver { color: var(--ink-3); font-size: 11px; }
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .nav-links a {
+    padding: 6px 12px;
+    color: var(--ink-2);
+    border-radius: 3px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-links a::before {
+    content: "";
+    color: var(--ink-3);
+  }
+  .nav-links a:hover { background: var(--bg-2); color: var(--ink); }
+  .nav-cta {
+    padding: 7px 14px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-radius: 3px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -8px var(--accent); }
+  @media (max-width: 720px) {
+    .nav { padding: 0 20px; }
+    .nav-links { display: none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 100vh;
+    padding: 160px 0 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+  .terminal {
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    background: color-mix(in oklch, var(--bg-2) 80%, transparent);
+    backdrop-filter: blur(8px);
+    margin-bottom: 64px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px -40px rgba(0,0,0,0.5);
+  }
+  .terminal-bar {
+    height: 32px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    background: var(--bg-3);
+  }
+  .terminal-bar .dots {
+    display: flex;
+    gap: 6px;
+    margin-right: 12px;
+  }
+  .terminal-bar .dots span {
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--ink-4);
+  }
+  .terminal-bar .dots span:nth-child(1) { background: #ff5f56; }
+  .terminal-bar .dots span:nth-child(2) { background: #ffbd2e; }
+  .terminal-bar .dots span:nth-child(3) { background: #27c93f; }
+  .terminal-bar .path { color: var(--ink-2); }
+  .terminal-bar .tag { margin-left: auto; color: var(--ink-3); }
+  .terminal-body {
+    padding: 24px 28px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    min-height: 180px;
+  }
+  .terminal-body .row { display: flex; gap: 10px; }
+  .terminal-body .prompt { color: var(--accent); }
+  .terminal-body .cmd { color: var(--ink); }
+  .terminal-body .out { color: var(--ink-2); padding-left: 20px; }
+  .terminal-body .out .k { color: var(--accent-soft); }
+  .terminal-body .out .v { color: var(--ink); }
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    margin-left: 2px;
+    animation: cursor 1s step-end infinite;
+  }
+  @keyframes cursor {
+    50% { opacity: 0; }
+  }
+
+  .hero-name {
+    font-family: var(--editorial);
+    font-size: clamp(72px, 12vw, 200px);
+    line-height: 0.86;
+    letter-spacing: -0.05em;
+    font-weight: 600;
+    margin: 0 0 32px;
+    overflow: hidden;
+  }
+  .hero-name .l1 {
+    display: block;
+    color: var(--ink);
+    transform: translateY(110%);
+    animation: rise 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  .hero-name .l2 {
+    display: block;
+    color: var(--accent);
+    transform: translateY(110%);
+    animation: rise 1s 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  @keyframes rise { to { transform: translateY(0); } }
+
+  .hero-summary {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+    max-width: 980px;
+    margin-bottom: 48px;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+  }
+  .hero-summary .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .hero-summary .text {
+    font-family: var(--mono);
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+  .hero-summary .text .hl { color: var(--accent); }
+  @media (max-width: 720px) {
+    .hero-summary { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 3px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid var(--line-2);
+    background: var(--bg-2);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn:hover {
+    border-color: var(--ink-2);
+    background: var(--bg-3);
+  }
+  .btn.primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+  .btn.primary:hover {
+    background: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px -8px var(--accent);
+  }
+  .btn .ico {
+    width: 14px; height: 14px;
+    color: var(--ink-3);
+  }
+  .btn.primary .ico { color: var(--accent-ink); }
+  .btn:hover .ico { color: var(--ink); }
+  .btn.primary:hover .ico { color: var(--accent-ink); }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    right: 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .scroll-indicator .arrow {
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    position: relative;
+  }
+  .scroll-indicator .arrow::after {
+    content: "";
+    position: absolute;
+    left: -3px;
+    bottom: 0;
+    width: 7px;
+    height: 7px;
+    border-right: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    transform: rotate(45deg);
+  }
+
+  /* ---------- Section base ---------- */
+  .section {
+    padding: 120px 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+  }
+  .section-head .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .section-head .slash { color: var(--ink-3); font-family: var(--mono); }
+  .section-head .name {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-2);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .section-head .meta {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .section-head .meta::before {
+    content: "[";
+    color: var(--ink-4);
+    margin-right: 4px;
+  }
+  .section-head .meta::after {
+    content: "]";
+    color: var(--ink-4);
+    margin-left: 4px;
+  }
+
+  .section-title {
+    font-family: var(--editorial);
+    font-size: clamp(38px, 5.4vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    margin: 0 0 56px;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .section-title .accent { color: var(--accent); }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- Currently / Atuação ---------- */
+  .panel {
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-2);
+  }
+  .panel-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-3);
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .panel-head .badge {
+    padding: 3px 8px;
+    background: color-mix(in oklch, var(--green) 15%, transparent);
+    color: var(--green);
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .panel-head .badge::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: blink 1.6s ease-in-out infinite;
+  }
+  .panel-head .title {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .panel-head .right {
+    margin-left: auto;
+    color: var(--ink-3);
+    font-size: 11px;
+  }
+
+  .currently-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 860px) { .currently-grid { grid-template-columns: 1fr; } }
+
+  .currently-headline {
+    padding: 32px;
+    font-family: var(--editorial);
+    font-size: clamp(32px, 3.8vw, 52px);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .currently-headline .accent { color: var(--accent); }
+  .currently-headline .small {
+    display: block;
+    margin-top: 24px;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    letter-spacing: 0;
+    max-width: 36ch;
+  }
+
+  .currently-list {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .currently-list .row {
+    display: grid;
+    grid-template-columns: 28px 80px 1fr;
+    gap: 16px;
+    padding: 16px 18px;
+    border-top: 1px solid var(--line);
+    align-items: start;
+    font-family: var(--mono);
+    font-size: 13px;
+    transition: background 0.2s;
+  }
+  .currently-list .row:hover { background: var(--bg-3); }
+  .currently-list .row .ix { color: var(--ink-3); }
+  .currently-list .row .key {
+    color: var(--accent);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding-top: 2px;
+  }
+  .currently-list .row .v {
+    color: var(--ink);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  /* ---------- Sobre / spec ---------- */
+  .spec-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  @media (max-width: 860px) { .spec-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .spec-text p {
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin: 0 0 18px;
+    max-width: 44ch;
+  }
+  .spec-text p strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .spec-card {
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    background: var(--bg-2);
+    overflow: hidden;
+  }
+  .spec-card .head {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+  .spec-card .head .lbl { color: var(--accent); }
+  .spec-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .spec-row:last-child { border-bottom: 0; }
+  .spec-row .k { color: var(--ink-3); }
+  .spec-row .v { color: var(--ink); font-weight: 500; }
+  .spec-row .v.accent { color: var(--accent); }
+  .spec-row .v.green { color: var(--green); }
+  .spec-row .v.green::before {
+    content: "";
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-right: 8px;
+    box-shadow: 0 0 8px var(--green);
+  }
+
+  /* ---------- Projects ---------- */
+  .project-list {
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-2);
+  }
+  .project-list .head {
+    display: grid;
+    grid-template-columns: 60px 1.4fr 2fr 1.4fr 80px;
+    gap: 16px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-3);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .project-row {
+    display: grid;
+    grid-template-columns: 60px 1.4fr 2fr 1.4fr 80px;
+    gap: 16px;
+    padding: 24px 20px;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+    transition: background 0.25s;
+    position: relative;
+  }
+  .project-row:last-child { border-bottom: 0; }
+  .project-row:hover { background: var(--bg-3); }
+  .project-row::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+  }
+  .project-row:hover::before { transform: scaleY(1); }
+  .project-row .ix {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .project-row .nm {
+    font-family: var(--editorial);
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    line-height: 1;
+    transition: transform 0.35s ease, color 0.35s ease;
+  }
+  .project-row:hover .nm {
+    transform: translateX(6px);
+    color: var(--ink);
+  }
+  .project-row .ds {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+  .project-row .ds .role {
+    display: block;
+    color: var(--ink-3);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .project-row .st {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .project-row .st span {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    padding: 3px 7px;
+    border: 1px solid var(--line-2);
+    border-radius: 3px;
+    color: var(--ink-2);
+  }
+  .project-row .arr {
+    display: grid;
+    place-items: center;
+    width: 32px; height: 32px;
+    border: 1px solid var(--line-2);
+    border-radius: 50%;
+    color: var(--ink-3);
+    margin-left: auto;
+    transition: all 0.25s;
+  }
+  .project-row:hover .arr {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: rotate(-45deg);
+  }
+  @media (max-width: 860px) {
+    .project-list .head { display: none; }
+    .project-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 20px;
+    }
+    .project-row .arr { display: none; }
+  }
+
+  /* ---------- Stack matrix ---------- */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) { .stack-grid { grid-template-columns: 1fr; } }
+  .stack-cat {
+    background: var(--bg-2);
+    padding: 28px 28px 24px;
+  }
+  .stack-cat .cat-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 18px;
+  }
+  .stack-cat .cat-head h3 {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .stack-cat .cat-head h3::before {
+    content: "// ";
+    color: var(--accent);
+  }
+  .stack-cat .cat-head .count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  .stack-cat ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .stack-cat li {
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 6px 12px;
+    background: var(--bg-3);
+    border: 1px solid var(--line-2);
+    border-radius: 3px;
+    color: var(--ink);
+    transition: all 0.2s;
+  }
+  .stack-cat li:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in oklch, var(--accent) 5%, var(--bg-3));
+  }
+
+  /* ---------- Marquee (editorial) ---------- */
+  .ticker {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 32px 0;
+    overflow: hidden;
+    background: var(--bg);
+    margin-top: 64px;
+  }
+  .ticker-track {
+    display: flex;
+    gap: 56px;
+    animation: tickerScroll 50s linear infinite;
+    width: max-content;
+    white-space: nowrap;
+  }
+  .ticker-track span {
+    font-family: var(--editorial);
+    font-size: 44px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    color: var(--ink-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 56px;
+    text-transform: none;
+    transition: color 0.2s;
+  }
+  .ticker-track span:hover { color: var(--ink); }
+  .ticker-track span::after {
+    content: "";
+    width: 10px; height: 10px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+  @keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ---------- Contact ---------- */
+  .contact {
+    padding: 120px 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-headline {
+    font-family: var(--editorial);
+    font-size: clamp(48px, 7.4vw, 110px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+    margin: 0 0 56px;
+    max-width: 18ch;
+    text-wrap: balance;
+  }
+  .contact-headline .accent { color: var(--accent); }
+  .contact-cmd {
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    background: var(--bg-2);
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    font-family: var(--mono);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .contact-cmd .prompt { color: var(--accent); }
+  .contact-cmd .cmd { color: var(--ink); }
+  .contact-cmd a {
+    color: var(--accent);
+    border-bottom: 1px dashed color-mix(in oklch, var(--accent) 50%, transparent);
+    padding-bottom: 1px;
+    transition: all 0.2s;
+  }
+  .contact-cmd a:hover {
+    background: color-mix(in oklch, var(--accent) 15%, transparent);
+    border-bottom-color: transparent;
+  }
+  .contact-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 64px;
+  }
+  .contact-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .contact-meta .item {
+    background: var(--bg-2);
+    padding: 20px 22px;
+  }
+  .contact-meta .lbl {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .contact-meta .val {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .contact-meta .val .accent { color: var(--accent); }
+  @media (max-width: 720px) { .contact-meta { grid-template-columns: 1fr 1fr; } }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 24px 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer .accent { color: var(--accent); }
+</style>
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <div class="bg-glow b"></div>
+  <div class="blob"></div>
+
+  <!-- TOP STATUS BAR -->
+  <div class="topbar">
+    <div class="left">
+      <span class="dot"></span>
+      <span>system online</span>
+      <span class="pill">pid 0001</span>
+      <span>~/mota-tecnologia</span>
+    </div>
+    <div class="right">
+      <span class="pill">v2026.1</span>
+      <span class="pill live">disponível</span>
+      <span class="clock" id="clock">--:--:--</span>
+    </div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <div class="nav-mark">
+      <span class="logo">M</span>
+      <span class="name">mota.tecnologia</span>
+      <span class="sep">/</span>
+      <span class="ver">tauã sampaio</span>
+    </div>
+    <div class="nav-links">
+      <a href="#atuacao">~/atuacao</a>
+      <a href="#sobre">~/sobre</a>
+      <a href="#projetos">~/projetos</a>
+      <a href="#stack">~/stack</a>
+    </div>
+    <a class="nav-cta" href="#contato">
+      ./contato
+      <svg viewBox="0 0 14 14" fill="none" width="12" height="12"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </nav>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero" data-screen-label="Hero">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span class="path">~ — bash — 92×24</span>
+          <span class="tag">↗ tauã.dev</span>
+        </div>
+        <div class="terminal-body" id="termBody">
+          <div class="row"><span class="prompt">$</span><span class="cmd" id="t1"></span></div>
+          <div class="row out hide" id="o1"><span class="k">→</span> initializing portfolio...</div>
+          <div class="row out hide" id="o2"><span class="k">→</span> loading <span class="v">12+ years</span> of experience...</div>
+          <div class="row out hide" id="o3"><span class="k">→</span> compiling <span class="v">3 production projects</span>...</div>
+          <div class="row out hide" id="o4"><span class="k">→</span> ready. <span class="v">welcome.</span><span class="cursor"></span></div>
+        </div>
       </div>
-    </header>
 
-    <main id="inicio" class="container">
-      <section class="hero" data-reveal>
-        <div class="hero-main">
-          <p class="eyebrow">Software Engineer · Teresópolis, Brasil</p>
-          <h1>Tauã Mota Sampaio</h1>
-          <p class="hero-copy">
-            Desenvolvo aplicações web, mobile e APIs com foco em arquitetura,
-            integrações, processamento assíncrono e escalabilidade.
-            Programo desde os 13 anos e construo software para resolver problemas reais.
-          </p>
-          <div class="hero-actions">
-            <a class="action action-primary" href="https://github.com/taua-mota" target="_blank" rel="noreferrer" data-track-event="Hero CTA GitHub">Ver GitHub</a>
-            <a class="action" href="https://www.linkedin.com/in/taua-mota/" target="_blank" rel="noreferrer" data-track-event="Hero CTA LinkedIn">Ver LinkedIn</a>
-            <a class="action" href="mailto:tauamota383@gmail.com" data-track-event="Hero CTA Email">Enviar e-mail</a>
+      <h1 class="hero-name" aria-label="Tauã Mota Sampaio">
+        <span class="l1">Tauã <span class="ital" style="color: var(--ink-2)">Mota</span></span>
+        <span class="l2">Sampaio<span style="color:var(--ink)">.</span></span>
+      </h1>
+
+      <div class="hero-summary">
+        <div class="label">// SOBRE</div>
+        <div class="text">
+          <span class="hl">Software Engineer</span> em Teresópolis, Brasil. Construo
+          aplicações web, mobile e APIs com foco em arquitetura,
+          integrações, processamento assíncrono e escalabilidade —
+          programando desde os 13 anos.
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn primary" href="#projetos" data-track-event="Hero CTA Projetos">
+          <svg class="ico" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M9 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          ver_projetos.sh
+        </a>
+        <a class="btn" href="https://github.com/taua-mota" target="_blank" rel="noopener noreferrer" data-track-event="Hero CTA GitHub">
+          <svg class="ico" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+        <a class="btn" href="mailto:tauamota383@gmail.com" data-track-event="Hero CTA Email">
+          <svg class="ico" viewBox="0 0 14 14" fill="none"><path d="M2 4l5 4 5-4M2 3h10v8H2z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          E-mail
+        </a>
+      </div>
+
+      <div class="scroll-indicator">
+        <span>scroll</span>
+        <div class="arrow"></div>
+      </div>
+    </section>
+
+    <!-- ATUAÇÃO ATUAL -->
+    <section class="section" id="atuacao" data-screen-label="Atuação">
+      <div class="section-head reveal">
+        <span class="num">02</span>
+        <span class="slash">//</span>
+        <span class="name">atuação atual</span>
+        <span class="meta">PROCESS: PRODUCTION</span>
+      </div>
+
+      <div class="panel reveal">
+        <div class="panel-head">
+          <span class="badge">Live</span>
+          <span class="title">@dataweb · software engineer</span>
+          <span class="right">uptime: contínuo</span>
+        </div>
+
+        <div class="currently-grid">
+          <div class="currently-headline">
+            Hoje na <span class="ital">Dataweb</span>, evoluindo sistemas de gestão usados em produção.
+            <span class="small">
+              Atuo na evolução de produtos de gestão empresarial em
+              operação diária — funcionalidades novas, decisões de arquitetura
+              e melhorias contínuas que mantêm velocidade com estabilidade.
+            </span>
+          </div>
+
+          <div class="currently-list">
+            <div class="row">
+              <span class="ix">01</span>
+              <span class="key">Produto</span>
+              <span class="v">Evolução de sistemas ERP e produtos de gestão empresarial.</span>
+            </div>
+            <div class="row">
+              <span class="ix">02</span>
+              <span class="key">Stack</span>
+              <span class="v">Trabalho fullstack: frontend, backend e integrações entre sistemas.</span>
+            </div>
+            <div class="row">
+              <span class="ix">03</span>
+              <span class="key">Async</span>
+              <span class="v">Automações e fluxos assíncronos para processos operacionais críticos.</span>
+            </div>
+            <div class="row">
+              <span class="ix">04</span>
+              <span class="key">Plataforma</span>
+              <span class="v">Performance, estabilidade e melhoria da experiência de desenvolvimento.</span>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="atualmente" class="section section-current" data-reveal>
-        <div class="section-head">
-          <p class="section-kicker">Atuação Atual</p>
-          <h2>Hoje na Dataweb, evoluindo sistemas de gestão usados em produção.</h2>
+    <!-- SOBRE -->
+    <section class="section" id="sobre" data-screen-label="Sobre">
+      <div class="section-head reveal">
+        <span class="num">03</span>
+        <span class="slash">//</span>
+        <span class="name">sobre</span>
+        <span class="meta">README.md</span>
+      </div>
+
+      <h2 class="section-title reveal">
+        Engenharia de software com <span class="ital">clareza</span> técnica e resultado de negócio.
+      </h2>
+
+      <div class="spec-grid">
+        <div class="spec-text reveal">
+          <p><strong>Construo produtos de ponta a ponta:</strong> interface, regras de negócio, dados e entrega em produção.</p>
+          <p>Priorizo sistemas bem estruturados, integrações confiáveis e experiências que simplificam o dia a dia de quem usa.</p>
+          <p>Programo desde os 13 anos e desenho software para resolver problemas reais — não só os interessantes tecnicamente.</p>
         </div>
 
-        <div class="current-grid">
-          <div>
-            <p>
-              Atuo como Software Engineer na Dataweb e participo da evolução
-              de produtos de gestão empresarial em operação diária.
-            </p>
-            <p>
-              Meu trabalho combina construção de funcionalidades, decisões de arquitetura
-              e melhorias contínuas para manter velocidade com estabilidade.
-            </p>
+        <div class="spec-card reveal">
+          <div class="head">
+            <span class="lbl">// system_specs</span>
+            <span>v.engineer</span>
           </div>
-          <ul class="current-list" aria-label="Escopo atual na Dataweb">
-            <li>Evolução de sistemas ERP e produtos de gestão empresarial</li>
-            <li>Trabalho fullstack: frontend, backend e integrações entre sistemas</li>
-            <li>Automações e fluxos assíncronos para processos operacionais críticos</li>
-            <li>Performance, estabilidade e melhoria da experiência de desenvolvimento</li>
+          <div class="spec-row">
+            <span class="k">role</span>
+            <span class="v">Software Engineer</span>
+          </div>
+          <div class="spec-row">
+            <span class="k">location</span>
+            <span class="v">Teresópolis, BR</span>
+          </div>
+          <div class="spec-row">
+            <span class="k">timezone</span>
+            <span class="v">UTC-03:00</span>
+          </div>
+          <div class="spec-row">
+            <span class="k">since</span>
+            <span class="v accent">2014 (13 anos)</span>
+          </div>
+          <div class="spec-row">
+            <span class="k">stack_size</span>
+            <span class="v">13 ferramentas principais</span>
+          </div>
+          <div class="spec-row">
+            <span class="k">projetos_ativos</span>
+            <span class="v accent">3 em produção</span>
+          </div>
+          <div class="spec-row">
+            <span class="k">status</span>
+            <span class="v green">disponível</span>
+          </div>
+          <div class="spec-row">
+            <span class="k">response_time</span>
+            <span class="v">~24h em dias úteis</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticker">
+        <div class="ticker-track">
+          <span>React</span><span>Next.js</span><span>Angular</span><span>Flutter</span><span>React Native</span>
+          <span>.NET</span><span>Node.js</span><span>Python</span><span>Java</span><span>PostgreSQL</span>
+          <span>MySQL</span><span>Docker</span><span>Traefik</span>
+          <span>React</span><span>Next.js</span><span>Angular</span><span>Flutter</span><span>React Native</span>
+          <span>.NET</span><span>Node.js</span><span>Python</span><span>Java</span><span>PostgreSQL</span>
+          <span>MySQL</span><span>Docker</span><span>Traefik</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETOS -->
+    <section class="section" id="projetos" data-screen-label="Projetos">
+      <div class="section-head reveal">
+        <span class="num">04</span>
+        <span class="slash">//</span>
+        <span class="name">projetos</span>
+        <span class="meta">3 EM PRODUÇÃO</span>
+      </div>
+
+      <h2 class="section-title reveal">
+        Projetos que mostram como eu <span class="ital">construo</span> software na prática.
+      </h2>
+
+      <div class="project-list reveal">
+        <div class="head">
+          <span>id</span>
+          <span>projeto</span>
+          <span>descrição</span>
+          <span>stack</span>
+          <span></span>
+        </div>
+
+        <article class="project-row" data-track-event="Projeto Quality">
+          <span class="ix">/01</span>
+          <span class="nm">Quality</span>
+          <span class="ds">
+            <span class="role">CRM/ERP · Independente</span>
+            CRM/ERP para marmorarias com foco em vendas, financeiro, operações e gestão diária.
+          </span>
+          <span class="st">
+            <span>Next.js</span><span>React</span><span>Prisma</span><span>MySQL</span><span>NextAuth</span>
+          </span>
+          <span class="arr">
+            <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </article>
+
+        <article class="project-row" data-track-event="Projeto Terrar">
+          <span class="ix">/02</span>
+          <span class="nm">Terrar</span>
+          <span class="ds">
+            <span class="role">Imobiliária · Independente</span>
+            Plataforma de gestão imobiliária focada em captação de imóveis, fluxo operacional e controle de acesso.
+          </span>
+          <span class="st">
+            <span>Next.js</span><span>React</span><span>PostgreSQL</span><span>Drizzle</span><span>better-auth</span>
+          </span>
+          <span class="arr">
+            <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </article>
+
+        <article class="project-row" data-track-event="Projeto SHK Contabilidade">
+          <span class="ix">/03</span>
+          <span class="nm">SHK Contabilidade</span>
+          <span class="ds">
+            <span class="role">Contábil · Plataforma completa</span>
+            Plataforma para escritório contábil com landing comercial, portal do cliente, gestão de documentos, importações e automações via WhatsApp.
+          </span>
+          <span class="st">
+            <span>TanStack Start</span><span>React</span><span>Drizzle</span><span>PostgreSQL</span><span>WhatsApp</span>
+          </span>
+          <span class="arr">
+            <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </article>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section class="section" id="stack" data-screen-label="Stack">
+      <div class="section-head reveal">
+        <span class="num">05</span>
+        <span class="slash">//</span>
+        <span class="name">stack</span>
+        <span class="meta">13 FERRAMENTAS</span>
+      </div>
+
+      <h2 class="section-title reveal">
+        Ferramentas <span class="ital">escolhidas</span>, usadas em produção.
+      </h2>
+
+      <div class="stack-grid reveal">
+        <div class="stack-cat">
+          <div class="cat-head">
+            <h3>frontend</h3>
+            <span class="count">5 items</span>
+          </div>
+          <ul>
+            <li>React</li><li>Next.js</li><li>Angular</li><li>Flutter</li><li>React Native</li>
           </ul>
         </div>
-      </section>
-
-      <section id="sobre" class="section" data-reveal>
-        <div class="section-head">
-          <p class="section-kicker">Sobre</p>
-          <h2>Engenharia de software com clareza técnica e resultado de negócio.</h2>
-        </div>
-
-        <div class="split">
-          <div>
-            <p>
-              Construo produtos de ponta a ponta: interface, regras de negócio,
-              dados e entrega em produção.
-            </p>
-            <p>
-              Priorizo sistemas bem estruturados, integrações confiáveis e
-              experiências que simplificam o dia a dia de quem usa.
-            </p>
+        <div class="stack-cat">
+          <div class="cat-head">
+            <h3>backend</h3>
+            <span class="count">4 items</span>
           </div>
-
-          <div>
-            <p class="mini-label">Stack principal</p>
-            <ul class="stack-list" aria-label="Tecnologias">
-              <li>React</li>
-              <li>Next.js</li>
-              <li>Angular</li>
-              <li>Flutter</li>
-              <li>React Native</li>
-              <li>.NET</li>
-              <li>Node.js</li>
-              <li>Python</li>
-              <li>Java</li>
-              <li>MySQL</li>
-              <li>PostgreSQL</li>
-              <li>Docker</li>
-              <li>Traefik</li>
-            </ul>
+          <ul>
+            <li>Node.js</li><li>.NET</li><li>Python</li><li>Java</li>
+          </ul>
+        </div>
+        <div class="stack-cat">
+          <div class="cat-head">
+            <h3>dados</h3>
+            <span class="count">4 items</span>
           </div>
+          <ul>
+            <li>PostgreSQL</li><li>MySQL</li><li>Drizzle</li><li>Prisma</li>
+          </ul>
         </div>
-      </section>
-
-      <section id="projetos" class="section" data-reveal>
-        <div class="section-head">
-          <p class="section-kicker">Projetos</p>
-          <h2>Projetos que mostram como eu construo software na prática.</h2>
+        <div class="stack-cat">
+          <div class="cat-head">
+            <h3>infra</h3>
+            <span class="count">2 items</span>
+          </div>
+          <ul>
+            <li>Docker</li><li>Traefik</li>
+          </ul>
         </div>
-
-        <div class="project-list">
-          <article class="project-item">
-            <span class="project-number">01</span>
-            <div class="project-content">
-              <h3>Quality</h3>
-              <p>
-                Projeto independente em tempo parcial. CRM/ERP para marmorarias
-                com foco em vendas, financeiro, operações e gestão diária.
-              </p>
-            </div>
-            <div class="project-meta">
-              <span class="chip">Next.js · React · Prisma · MySQL · NextAuth</span>
-            </div>
-          </article>
-
-          <article class="project-item">
-            <span class="project-number">02</span>
-            <div class="project-content">
-              <h3>Terrar</h3>
-              <p>
-                Projeto independente em tempo parcial. Plataforma de gestão imobiliária
-                focada em captação de imóveis, fluxo operacional e controle de acesso.
-              </p>
-            </div>
-            <div class="project-meta">
-              <span class="chip">Next.js · React · PostgreSQL · Drizzle · better-auth</span>
-            </div>
-          </article>
-
-          <article class="project-item">
-            <span class="project-number">03</span>
-            <div class="project-content">
-              <h3>SHK Contabilidade</h3>
-              <p>
-                Plataforma para escritório contábil com landing comercial, portal
-                do cliente, gestão de documentos, importações e automações via WhatsApp.
-              </p>
-            </div>
-            <div class="project-meta">
-              <span class="chip">TanStack Start · React · Drizzle · PostgreSQL · WhatsApp</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="contato" class="contact" data-reveal>
-        <p class="section-kicker">Contato</p>
-        <h2>Quer tirar um produto do papel ou evoluir um sistema existente?</h2>
-        <div class="contact-links">
-          <a href="mailto:tauamota383@gmail.com" data-track-event="Contato Email">Enviar e-mail: tauamota383@gmail.com</a>
-          <a href="https://github.com/taua-mota" target="_blank" rel="noreferrer" data-track-event="Contato GitHub">Perfil no GitHub</a>
-          <a href="https://www.linkedin.com/in/taua-mota/" target="_blank" rel="noreferrer" data-track-event="Contato LinkedIn">Perfil no LinkedIn</a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <p>© <span id="year"></span> Tauã Mota Sampaio</p>
       </div>
-    </footer>
+    </section>
 
-    <script>
-      const year = document.getElementById('year');
-      year.textContent = new Date().getFullYear();
+  </main>
 
-      function getSessionId() {
-        const key = 'portfolio_session_id';
-        const current = localStorage.getItem(key);
+  <!-- CONTACT -->
+  <section class="contact" id="contato" data-screen-label="Contato">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="num">06</span>
+        <span class="slash">//</span>
+        <span class="name">contato</span>
+        <span class="meta">CONNECT</span>
+      </div>
 
-        if (current) return current;
+      <h2 class="contact-headline reveal">
+        Quer tirar um produto do papel ou <span class="ital">evoluir</span> um sistema existente?
+      </h2>
 
-        const generated =
-          (crypto?.randomUUID?.() || `sid_${Date.now()}_${Math.random().toString(16).slice(2)}`);
-        localStorage.setItem(key, generated);
-        return generated;
-      }
+      <div class="contact-cmd reveal">
+        <span class="prompt">$</span>
+        <span class="cmd">mail</span>
+        <a href="mailto:tauamota383@gmail.com" data-track-event="Contato Email Inline">tauamota383@gmail.com</a>
+        <span style="color:var(--ink-3)">--subject="vamos construir algo"</span>
+      </div>
 
-      function sendTrack(payload) {
-        const body = JSON.stringify(payload);
+      <div class="contact-actions reveal">
+        <a class="btn primary" href="mailto:tauamota383@gmail.com" data-track-event="Contato Email">
+          <svg class="ico" viewBox="0 0 14 14" fill="none"><path d="M2 4l5 4 5-4M2 3h10v8H2z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          enviar e-mail
+        </a>
+        <a class="btn" href="https://github.com/taua-mota" target="_blank" rel="noopener noreferrer" data-track-event="Contato GitHub">
+          <svg class="ico" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+        <a class="btn" href="https://www.linkedin.com/in/taua-mota/" target="_blank" rel="noopener noreferrer" data-track-event="Contato LinkedIn">
+          <svg class="ico" viewBox="0 0 16 16" fill="currentColor"><path d="M13.6 0H2.4A2.4 2.4 0 0 0 0 2.4v11.2A2.4 2.4 0 0 0 2.4 16h11.2a2.4 2.4 0 0 0 2.4-2.4V2.4A2.4 2.4 0 0 0 13.6 0zM4.8 13.6H2.4V6.4h2.4v7.2zM3.6 5.2a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8zM13.6 13.6h-2.4V9.8c0-.9-.4-1.4-1.1-1.4-.8 0-1.3.5-1.3 1.4v3.8H6.4V6.4h2.3v1.1c.4-.6 1.1-1.1 2.2-1.1 1.6 0 2.7 1 2.7 3v4.2z"/></svg>
+          LinkedIn
+        </a>
+      </div>
 
-        if (navigator.sendBeacon) {
-          const blob = new Blob([body], { type: 'application/json' });
-          navigator.sendBeacon('/api/track', blob);
-          return;
-        }
+      <div class="contact-meta reveal">
+        <div class="item">
+          <div class="lbl">// localização</div>
+          <div class="val">Teresópolis, <span style="color: var(--accent)">BR</span></div>
+        </div>
+        <div class="item">
+          <div class="lbl">// disponibilidade</div>
+          <div class="val">Projetos & Consultoria</div>
+        </div>
+        <div class="item">
+          <div class="lbl">// resposta</div>
+          <div class="val">~24h dias úteis</div>
+        </div>
+        <div class="item">
+          <div class="lbl">// horas</div>
+          <div class="val" id="zoneClock">--:-- BRT</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        fetch('/api/track', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body,
-          keepalive: true,
-        }).catch(() => {});
-      }
+  <footer>
+    <div class="container">
+      <span>© 2026 Tauã Mota Sampaio</span>
+      <span><span class="accent">●</span> mota.tecnologia / v.terminal</span>
+      <span>built with care · v2026.1</span>
+    </div>
+  </footer>
 
-      function trackEvent(eventType, eventName) {
-        sendTrack({
-          eventType,
-          eventName,
-          page: window.location.pathname,
-          referrer: document.referrer || '',
-          language: navigator.language || '',
-          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
-          viewport: `${window.innerWidth}x${window.innerHeight}`,
-          sessionId: getSessionId(),
-        });
-      }
+<script>
+  // Clock
+  function tick() {
+    const d = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const t = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+    const e1 = document.getElementById('clock');
+    const e2 = document.getElementById('zoneClock');
+    if (e1) e1.textContent = t + ' BRT';
+    if (e2) e2.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ' BRT';
+  }
+  tick();
+  setInterval(tick, 1000);
 
-      trackEvent('pageview', 'pageview');
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
 
-      document.querySelectorAll('[data-track-event]').forEach((element) => {
-        element.addEventListener('click', () => {
-          const eventName = element.getAttribute('data-track-event');
-          if (!eventName) return;
-          trackEvent('event', eventName);
-        });
+  // Cursor blob
+  const blob = document.querySelector('.blob');
+  if (blob) {
+    let mx = window.innerWidth * 0.35, my = window.innerHeight * 0.25;
+    let tx = mx, ty = my;
+    document.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+    function blobLoop() {
+      mx += (tx - mx) * 0.08;
+      my += (ty - my) * 0.08;
+      blob.style.setProperty('--mx', mx + 'px');
+      blob.style.setProperty('--my', my + 'px');
+      requestAnimationFrame(blobLoop);
+    }
+    blobLoop();
+  }
+
+  // Terminal typing
+  const termText = "whoami --full";
+  const t1 = document.getElementById('t1');
+  let i = 0;
+  function type() {
+    if (i <= termText.length) {
+      t1.textContent = termText.slice(0, i) + (i < termText.length ? '▎' : '');
+      i++;
+      setTimeout(type, 60);
+    } else {
+      t1.textContent = termText;
+      // reveal output rows
+      const outs = ['o1', 'o2', 'o3', 'o4'];
+      outs.forEach((id, idx) => {
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) el.classList.remove('hide');
+        }, 250 * (idx + 1));
       });
-    </script>
-  </body>
+    }
+  }
+  // hide initially
+  document.querySelectorAll('.terminal-body .out').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(6px)';
+    el.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+  });
+  // override: when class 'hide' is removed, fade in
+  const obs = new MutationObserver(muts => {
+    muts.forEach(m => {
+      if (m.type === 'attributes' && m.attributeName === 'class') {
+        const el = m.target;
+        if (!el.classList.contains('hide')) {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }
+      }
+    });
+  });
+  document.querySelectorAll('.terminal-body .out').forEach(el => {
+    obs.observe(el, { attributes: true });
+  });
+  setTimeout(type, 600);
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Self-hosted analytics
+  function getSessionId() {
+    const key = 'portfolio_session_id';
+    const current = localStorage.getItem(key);
+
+    if (current) return current;
+
+    const generated =
+      (window.crypto?.randomUUID?.() || `sid_${Date.now()}_${Math.random().toString(16).slice(2)}`);
+    localStorage.setItem(key, generated);
+    return generated;
+  }
+
+  function sendTrack(payload) {
+    const body = JSON.stringify(payload);
+
+    if (navigator.sendBeacon) {
+      const blob = new Blob([body], { type: 'application/json' });
+      navigator.sendBeacon('/api/track', blob);
+      return;
+    }
+
+    fetch('/api/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body,
+      keepalive: true,
+    }).catch(() => {});
+  }
+
+  function trackEvent(eventType, eventName) {
+    sendTrack({
+      eventType,
+      eventName,
+      page: window.location.pathname,
+      referrer: document.referrer || '',
+      language: navigator.language || '',
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+      viewport: `${window.innerWidth}x${window.innerHeight}`,
+      sessionId: getSessionId(),
+    });
+  }
+
+  trackEvent('pageview', 'pageview');
+
+  document.querySelectorAll('[data-track-event]').forEach((element) => {
+    element.addEventListener('click', () => {
+      const eventName = element.getAttribute('data-track-event');
+      if (!eventName) return;
+      trackEvent('event', eventName);
+    });
+  });
+</script>
+
+</body>
 </html>
