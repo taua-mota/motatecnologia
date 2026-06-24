@@ -7,6 +7,7 @@ COPY styles.css ./styles.css
 COPY dashboard.html ./dashboard.html
 COPY server.py ./server.py
 COPY aniversario ./aniversario
+COPY auditorias ./auditorias
 
 ENV PORT=80
 
